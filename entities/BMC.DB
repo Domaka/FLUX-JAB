@@ -1,0 +1,55 @@
+{
+  "name": "BMC",
+  "type": "object",
+  "properties": {
+    "project_id": {
+      "type": "string",
+      "description": "Related project"
+    },
+    "user_id": {
+      "type": "string",
+      "description": "Owner user id"
+    },
+    "block_key": {
+      "type": "string",
+      "enum": [
+        "customer_segments",
+        "value_props",
+        "channels",
+        "customer_relationships",
+        "revenue_streams",
+        "key_resources",
+        "key_activities",
+        "key_partnerships",
+        "cost_structure"
+      ],
+      "description": "BMC block key"
+    },
+    "content": {
+      "type": "string",
+      "description": "Saved content for this block (markdown/plain)"
+    }
+  },
+  "required": [
+    "project_id",
+    "block_key",
+    "content"
+  ],
+  "rls": {
+    "read": {
+      "created_by": "{{user.email}}"
+    },
+    "write": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "created_by": "{{user.email}}"
+        }
+      ]
+    }
+  }
+}

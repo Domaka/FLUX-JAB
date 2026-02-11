@@ -1,0 +1,62 @@
+{
+  "name": "ChecklistTask",
+  "type": "object",
+  "properties": {
+    "project_id": {
+      "type": "string",
+      "description": "Related project"
+    },
+    "phase": {
+      "type": "string",
+      "enum": [
+        "pre_launch",
+        "launch",
+        "post_launch"
+      ],
+      "description": "Roadmap phase"
+    },
+    "title": {
+      "type": "string",
+      "description": "Task title"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "todo",
+        "done"
+      ],
+      "default": "todo",
+      "description": "Completion status"
+    },
+    "due_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Optional due date"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Extra notes"
+    }
+  },
+  "required": [
+    "project_id",
+    "title"
+  ],
+  "rls": {
+    "read": {
+      "created_by": "{{user.email}}"
+    },
+    "write": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "created_by": "{{user.email}}"
+        }
+      ]
+    }
+  }
+}

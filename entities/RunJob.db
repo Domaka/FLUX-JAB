@@ -1,0 +1,59 @@
+{
+  "name": "RunJob",
+  "type": "object",
+  "properties": {
+    "project_id": {
+      "type": "string",
+      "description": "Associated project ID"
+    },
+    "module": {
+      "type": "string",
+      "enum": [
+        "market_fit",
+        "persona",
+        "opportunity",
+        "roadmap",
+        "creative",
+        "full_run"
+      ],
+      "description": "Module being executed"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "running",
+        "completed",
+        "failed"
+      ],
+      "default": "pending",
+      "description": "Job status"
+    },
+    "progress": {
+      "type": "number",
+      "description": "Progress percentage 0-100"
+    },
+    "result_data": {
+      "type": "object",
+      "description": "JSON result from the module"
+    },
+    "error_message": {
+      "type": "string",
+      "description": "Error message if failed"
+    },
+    "started_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the job started"
+    },
+    "finished_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the job completed"
+    }
+  },
+  "required": [
+    "project_id",
+    "module"
+  ]
+}

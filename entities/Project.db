@@ -1,0 +1,82 @@
+{
+  "name": "Creative",
+  "type": "object",
+  "properties": {
+    "project_id": {
+      "type": "string",
+      "description": "Associated project ID"
+    },
+    "channel": {
+      "type": "string",
+      "enum": [
+        "facebook",
+        "instagram",
+        "google",
+        "tiktok",
+        "linkedin",
+        "youtube"
+      ],
+      "description": "Target advertising channel"
+    },
+    "format": {
+      "type": "string",
+      "enum": [
+        "text",
+        "image",
+        "video",
+        "carousel"
+      ],
+      "description": "Creative format type"
+    },
+    "headline": {
+      "type": "string",
+      "description": "Ad headline"
+    },
+    "body_copy": {
+      "type": "string",
+      "description": "Main ad copy"
+    },
+    "cta": {
+      "type": "string",
+      "description": "Call-to-action text"
+    },
+    "predicted_performance": {
+      "type": "string",
+      "enum": [
+        "low",
+        "medium",
+        "high"
+      ],
+      "description": "AI performance prediction"
+    },
+    "image_prompt": {
+      "type": "string",
+      "description": "AI image generation prompt"
+    },
+    "performance_rationale": {
+      "type": "string",
+      "description": "Why this creative should perform well"
+    }
+  },
+  "required": [
+    "project_id",
+    "channel"
+  ],
+  "rls": {
+    "read": {
+      "created_by": "{{user.email}}"
+    },
+    "write": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "created_by": "{{user.email}}"
+        }
+      ]
+    }
+  }
+}

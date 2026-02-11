@@ -1,0 +1,70 @@
+{
+  "name": "Artifact",
+  "type": "object",
+  "properties": {
+    "project_id": {
+      "type": "string",
+      "description": "Related project ID"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "market_fit",
+        "planning",
+        "creative",
+        "analytics",
+        "risk",
+        "playbook",
+        "post_launch"
+      ],
+      "description": "Main workspace category"
+    },
+    "tool_key": {
+      "type": "string",
+      "description": "Unique sub-tool identifier, e.g., stress_test"
+    },
+    "title": {
+      "type": "string",
+      "description": "Human-friendly title"
+    },
+    "data": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "Structured output data from AI"
+    },
+    "shared_with": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Emails of collaborators with access"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Optional notes or summary"
+    }
+  },
+  "required": [
+    "category",
+    "tool_key",
+    "title",
+    "data"
+  ],
+  "rls": {
+    "read": {
+      "created_by": "{{user.email}}"
+    },
+    "write": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "created_by": "{{user.email}}"
+        }
+      ]
+    }
+  }
+}

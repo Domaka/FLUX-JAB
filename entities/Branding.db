@@ -1,0 +1,29 @@
+{
+  "name": "Branding",
+  "type": "object",
+  "properties": {
+    "app_name": {
+      "type": "string",
+      "description": "Application display name"
+    },
+    "logo_url": {
+      "type": "string",
+      "description": "Brand logo URL (used in sidebar/header)"
+    },
+    "video_url": {
+      "type": "string",
+      "description": "Homepage autoplay video URL (muted)"
+    }
+  },
+  "required": [
+    "logo_url"
+  ],
+  "rls": {
+    "read": null,
+    "write": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

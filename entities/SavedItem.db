@@ -1,0 +1,64 @@
+{
+  "name": "SavedItem",
+  "type": "object",
+  "properties": {
+    "user_id": {
+      "type": "string",
+      "description": "Owner user id (redundant to created_by for client filtering)"
+    },
+    "project_id": {
+      "type": "string",
+      "description": "Project folder"
+    },
+    "tab_name": {
+      "type": "string",
+      "description": "Source tab (e.g., Creative Lab, Insights)"
+    },
+    "subtab_name": {
+      "type": "string",
+      "description": "Sub-tool within the tab"
+    },
+    "title": {
+      "type": "string",
+      "description": "Item title"
+    },
+    "content_type": {
+      "type": "string",
+      "description": "mime/category of content (e.g., text, json, chart)"
+    },
+    "content_json": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "Structured content blob"
+    },
+    "content_text": {
+      "type": "string",
+      "description": "Readable text excerpt"
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "Arbitrary metadata/data blob"
+    }
+  },
+  "required": [
+    "title"
+  ],
+  "rls": {
+    "read": {
+      "created_by": "{{user.email}}"
+    },
+    "write": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "created_by": "{{user.email}}"
+        }
+      ]
+    }
+  }
+}

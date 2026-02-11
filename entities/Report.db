@@ -1,0 +1,52 @@
+{
+  "name": "Report",
+  "type": "object",
+  "properties": {
+    "project_id": {
+      "type": "string",
+      "description": "Associated project ID"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "full_run",
+        "market_fit",
+        "persona",
+        "roadmap",
+        "custom"
+      ],
+      "description": "Report type"
+    },
+    "title": {
+      "type": "string",
+      "description": "Report title"
+    },
+    "executive_summary": {
+      "type": "string",
+      "description": "Human-readable executive summary"
+    },
+    "content_json": {
+      "type": "object",
+      "description": "Full structured report data"
+    },
+    "pdf_url": {
+      "type": "string",
+      "description": "URL to generated PDF"
+    },
+    "notion_url": {
+      "type": "string",
+      "description": "URL to Notion export"
+    },
+    "export_formats": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Available export formats"
+    }
+  },
+  "required": [
+    "project_id",
+    "type"
+  ]
+}
